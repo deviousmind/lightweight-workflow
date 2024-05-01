@@ -1,4 +1,6 @@
 import WorkflowBuilder from "../src/workflowBuilder.js";
+import Step from "../src/step.js";
+import { expect } from "chai";
 
 describe("workflowBuilder", () => {
   let builder;
@@ -8,7 +10,14 @@ describe("workflowBuilder", () => {
 
   describe("with", () => {
     it("adds step to workflow", () => {
-      builder.with();
+      let step1 = new Step();
+      let step1 = new Step();
+
+      builder.with(step1);
+      builder.with(step1);
+
+      expect(builder.steps[0]).to.equal(step1);
+      expect(builder.steps[1]).to.equal(step1);
     });
   });
 });
