@@ -11,13 +11,13 @@ describe("workflowBuilder", () => {
   describe("with", () => {
     it("adds step to workflow", () => {
       let step1 = new Step();
-      let step1 = new Step();
+      let step2 = new Step();
 
       builder.with(step1);
-      builder.with(step1);
+      builder.with(step2);
 
       expect(builder.steps[0]).to.equal(step1);
-      expect(builder.steps[1]).to.equal(step1);
+      expect(builder.steps[1]).to.equal(step2);
     });
   });
 });
