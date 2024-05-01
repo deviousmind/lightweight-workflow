@@ -19,15 +19,46 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: 'Install Node'
+    - name: Install Node
       uses: actions/setup-node@v4
       with:
         node-version: '${{ matrix.node }}'
         
-    - name: Install dependencies
+    - name: Install Dependencies
       run: npm install 
       
-    - name: "Run Tests"
+    - name: Run Tests
       run: npm run test
+
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: 1.${{ github.run_number }}.${{ github.run_attempt }}
+      NODE_ENV: production
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install Dependencies
+      run: npm install 
+      
+    - name: Build
+      run: npm run build
+
+    - name: Package
+      run: npm pack
+
+    - name: Tag Release
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.VERSION }}
+        files: |
+          *.tgz
 
 
