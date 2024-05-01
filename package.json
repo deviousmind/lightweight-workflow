@@ -1,0 +1,38 @@
+{
+  "name": "lightweight-workflow",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Daniel Miller",
+  "license": "ISC",
+  "keywords": [
+    "workflow"
+  ],
+  "publishConfig": {
+    "registry": "https://"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "type": "module",
+  "source": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "eslint": "^9.1.1",
+    "lint-staged": "^15.2.2",
+    "mocha": "^10.4.0",
+    "parcel": "^2.12.0",
+    "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "parcel build index.js",
+    "validate": "prettier --write --ignore-unknown src test && eslint --fix ."
+  },
+  "lint-staged": {
+    "*.js": "npm run validate --"
+  }
+}
