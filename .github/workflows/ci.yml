@@ -61,6 +61,15 @@ jobs:
         token: ${{ secrets.RELEASE_TOKEN }}
         files: |
           *.tgz
+
+    - name: Tag Release
+      if: ${{ github.ref == 'refs/heads/main' }}
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ env.VERSION }}
+        token: ${{ secrets.RELEASE_TOKEN }}
+        files: |
+          *.tgz
     
 
 

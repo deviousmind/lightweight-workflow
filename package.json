@@ -16,6 +16,9 @@
   "type": "module",
   "source": "index.js",
   "main": "dist/index.js",
+  "bin": {
+    "ligtghweight-workflow": "bin/lightweight-workflow.js"
+  },
   "files": [
     "dist/**"
   ],
