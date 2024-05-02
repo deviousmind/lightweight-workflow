@@ -51,7 +51,10 @@ jobs:
       run: npm run build
 
     - name: Package
-      run: npm pack
+      if: ${{ github.ref == 'refs/heads/main' }}
+      run: |
+        npm version --no-git-tag-version ${{ env.VERSION }}
+        npm pack
 
     - name: Tag Release
       if: ${{ github.ref == 'refs/heads/main' }}
@@ -61,15 +64,3 @@ jobs:
         token: ${{ secrets.RELEASE_TOKEN }}
         files: |
           *.tgz
-
-    - name: Tag Release
-      if: ${{ github.ref == 'refs/heads/main' }}
-      uses: softprops/action-gh-release@v2
-      with:
-        tag_name: ${{ env.VERSION }}
-        token: ${{ secrets.RELEASE_TOKEN }}
-        files: |
-          *.tgz
-    
-
-
